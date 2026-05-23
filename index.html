@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滬尾秘境・淡水助順將軍廟 (晉德宮) 數位導覽</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Serif TC & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        temple: {
+                            red: '#8B1E0F',
+                            darkred: '#5C1107',
+                            gold: '#D4AF37',
+                            darkgold: '#AA820A',
+                            charcoal: '#1A1818',
+                            slate: '#2D2929',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .font-serif-tc { font-family: 'Noto Serif TC', serif; }
+        .font-sans-tc { font-family: 'Noto Sans TC', sans-serif; }
+        
+        /* Shaking animation for oracle jar */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(0px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(2px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(2px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .shake-active {
+            animation: shake 0.8s ease-in-out infinite;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1A1818;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8B1E0F;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+    </style>
+</head>
+<body class="bg-temple-charcoal text-gray-200 font-sans-tc min-h-screen selection:bg-temple-gold selection:text-temple-charcoal">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 w-full bg-temple-charcoal/95 backdrop-blur-md border-b border-temple-red/30 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-temple-red p-2.5 rounded-full border border-temple-gold shadow-lg shadow-temple-red/20">
+                    <i class="fa-solid fa-gopuram text-temple-gold text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold font-serif-tc text-temple-gold tracking-widest block leading-tight">淡水助順將軍廟</span>
+                    <span class="text-xs text-gray-400 tracking-wider font-serif-tc">滬尾 晉德宮</span>
+                </div>
+            </div>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#home" class="text-temple-gold hover:text-white transition duration-200 tracking-wider">首頁</a>
+                <a href="#history" class="text-gray-300 hover:text-temple-gold transition duration-200 tracking-wider">歷史沿革</a>
+                <a href="#deities" class="text-gray-300 hover:text-temple-gold transition duration-200 tracking-wider">主祀神明</a>
+                <a href="#interactive" class="text-gray-300 hover:text-temple-gold transition duration-200 tracking-wider">線上求籤</a>
+                <a href="#quiz" class="text-gray-300 hover:text-temple-gold transition duration-200 tracking-wider">文史挑戰</a>
+                <a href="#visit" class="text-gray-300 hover:text-temple-gold transition duration-200 tracking-wider">參拜指引</a>
+            </nav>
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-temple-gold focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-temple-slate border-b border-temple-red/20 px-4 pt-2 pb-4 space-y-2">
+            <a href="#home" class="block py-2 px-3 rounded-md hover:bg-temple-red/20 text-temple-gold font-medium">首頁</a>
+            <a href="#history" class="block py-2 px-3 rounded-md hover:bg-temple-red/20 text-gray-300">歷史沿革</a>
+            <a href="#deities" class="block py-2 px-3 rounded-md hover:bg-temple-red/20 text-gray-300">主祀神明</a>
+            <a href="#interactive" class="block py-2 px-3 rounded-md hover:bg-temple-red/20 text-gray-300">線上求籤</a>
+            <a href="#quiz" class="block py-2 px-3 rounded-md hover:bg-temple-red/20 text-gray-300">文史挑戰</a>
+            <a href="#visit" class="block py-2 px-3 rounded-md hover:bg-temple-red/20 text-gray-300">參拜指引</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-24 md:py-48 flex items-center justify-center overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(to bottom, rgba(26, 24, 24, 0.85), rgba(26, 24, 24, 0.98)), url('https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?auto=format&fit=crop&w=1920&q=80');">
+        <!-- Traditional Pattern Overlay -->
+        <div class="absolute inset-0 opacity-5 mix-blend-overlay bg-[radial-gradient(#8b1e0f_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <!-- Ancient Border Accent -->
+            <div class="inline-flex items-center space-x-2 text-temple-gold mb-6 border-y border-temple-gold/40 py-2 px-4 uppercase tracking-[0.2em] text-xs sm:text-sm">
+                <span class="w-1.5 h-1.5 bg-temple-gold rotate-45"></span>
+                <span>淡水百年古廟・晉德宮</span>
+                <span class="w-1.5 h-1.5 bg-temple-gold rotate-45"></span>
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-widest font-serif-tc text-white mb-6 leading-tight drop-shadow-md">
+                淡水 <span class="text-temple-gold block sm:inline">助順將軍廟</span>
+            </h1>
+            
+            <p class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                隱身於淡水老街與繁華市集旁的百年信仰。
+                源自福建泉州的鄉土神祇，歷經百載風雨，依舊香火繚繞，庇佑著滬尾一代的安寧與昌盛。
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#interactive" class="w-full sm:w-auto px-8 py-3.5 bg-temple-red hover:bg-temple-darkred text-white font-medium rounded-md shadow-lg shadow-temple-red/30 border border-temple-gold/30 hover:border-temple-gold transition duration-300 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-person-praying"></i>
+                    <span>線上求籤・解開迷津</span>
+                </a>
+                <a href="#history" class="w-full sm:w-auto px-8 py-3.5 bg-temple-slate/80 hover:bg-temple-slate text-temple-gold hover:text-white font-medium rounded-md border border-temple-gold/30 transition duration-300 flex items-center justify-center space-x-2">
+                    <span>探尋古廟歷史</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Decorative Traditional Clouds bottom border -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
+            <svg class="relative block w-full h-[50px] text-temple-slate" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0 C150,90 350,120 600,100 C850,80 1050,110 1200,80 L1200,120 L0,120 Z" fill="currentColor"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Intro Stats Banner -->
+    <section class="bg-temple-slate border-y border-temple-red/20 py-8 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4 border-r border-temple-red/10 last:border-0">
+                    <p class="text-temple-gold text-3xl md:text-4xl font-bold font-serif-tc">1841年</p>
+                    <p class="text-xs text-gray-400 mt-2 tracking-wider">歷史可追溯（清道光21年）</p>
+                </div>
+                <div class="p-4 border-r border-temple-red/10 md:last:border-0">
+                    <p class="text-temple-gold text-3xl md:text-4xl font-bold font-serif-tc">黃府將軍</p>
+                    <p class="text-xs text-gray-400 mt-2 tracking-wider">大、二、三位將軍尊神</p>
+                </div>
+                <div class="p-4 border-r border-temple-red/10 last:border-0">
+                    <p class="text-temple-gold text-3xl md:text-4xl font-bold font-serif-tc">中正路64號</p>
+                    <p class="text-xs text-gray-400 mt-2 tracking-wider">淡水老街後街仔</p>
+                </div>
+                <div class="p-4 last:border-0">
+                    <p class="text-temple-gold text-3xl md:text-4xl font-bold font-serif-tc">十月初六</p>
+                    <p class="text-xs text-gray-400 mt-2 tracking-wider">年度聖誕慶典千秋</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left: Text -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="flex items-center space-x-2 text-temple-gold">
+                    <span class="h-px w-8 bg-temple-gold"></span>
+                    <span class="text-sm font-semibold tracking-widest uppercase">歷史沿革</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold font-serif-tc text-white leading-tight">
+                    隱身淡水街市的 <br><span class="text-temple-gold">百年古廟與先民足跡</span>
+                </h2>
+                
+                <div class="h-1 w-20 bg-gradient-to-r from-temple-gold to-transparent rounded"></div>
+                
+                <p class="text-gray-300 leading-relaxed font-light">
+                    淡水助順將軍廟，又稱<strong>黃府將軍廟</strong>，原名<strong>淡水晉德宮</strong>。它默默地坐落在淡水繁華喧囂的中正路旁（舊稱滬尾後街仔）。這座小巧卻莊嚴的廟宇，乘載了淡水百餘年來的漢人開墾與港口貿易歷史。
+                </p>
+                
+                <p class="text-gray-300 leading-relaxed font-light">
+                    根據林衡道老先生與淡水文史工作者考察，將軍廟的歷史最早可追溯至<strong>清道光21年（1841年）</strong>。清朝光緒年間，淡水的黃氏宗親與先民感念將軍爺威靈顯赫，特地從萬華（艋舺）「晉德宮」分靈過來，建廟奉祀。
+                </p>
+
+                <p class="text-gray-300 leading-relaxed font-light">
+                    過去，這裡曾是淡水河畔船頭行、碼頭工人與勞工階級的信仰依歸。他們每日在港口勞動、討生活，全賴將軍爺庇護出海與生活平安。隨著時代推移，原本的木構民宅歷經數次重修，於 <strong>民國110年（2021年）</strong> 完成最新一次的大規模重修落成安座，讓這座百年神壇在鋼筋水泥的現代公寓環抱中，重新散發古樸且璀璨的金色光芒。
+                </p>
+            </div>
+            
+            <!-- Right: Beautiful Visual Card -->
+            <div class="lg:col-span-5 bg-temple-slate p-8 rounded-lg border border-temple-red/30 shadow-xl relative overflow-hidden group">
+                <div class="absolute -right-12 -top-12 w-48 h-48 bg-temple-red/10 rounded-full blur-3xl group-hover:bg-temple-red/20 transition-all duration-500"></div>
+                
+                <h3 class="text-xl font-bold font-serif-tc text-temple-gold border-b border-temple-red/30 pb-4 mb-6 tracking-wide flex items-center space-x-2">
+                    <i class="fa-solid fa-bookmark text-sm"></i>
+                    <span>將軍廟與淡水三大繞境</span>
+                </h3>
+                
+                <ul class="space-y-6">
+                    <li class="flex items-start space-x-4">
+                        <div class="bg-temple-red/30 text-temple-gold p-2 rounded-md mt-1 shrink-0">
+                            <i class="fa-solid fa-fire text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">清水祖師暗訪繞境</h4>
+                            <p class="text-sm text-gray-400 mt-1">每年農曆五月初五、初六著名的「淡水大拜拜」（清水祖師繞境），助順將軍廟亦會組織陣頭、出神轎參與暗訪，威鎮街坊。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-4">
+                        <div class="bg-temple-red/30 text-temple-gold p-2 rounded-md mt-1 shrink-0">
+                            <i class="fa-solid fa-cake-candles text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">十月初六 聖誕慶典</h4>
+                            <p class="text-sm text-gray-400 mt-1">不同於萬華晉德宮於十月初三慶祝，淡水助順將軍廟傳統上以「十月初六」作為將軍爺的聖誕千秋日，舉辦熱鬧的安壇、犒軍與祝壽科儀。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-4">
+                        <div class="bg-temple-red/30 text-temple-gold p-2 rounded-md mt-1 shrink-0">
+                            <i class="fa-solid fa-scale-balanced text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-white">神明身世信仰考究</h4>
+                            <p class="text-sm text-gray-400 mt-1">本廟供奉的是「黃府三位將軍」，見證了原鄉閩南移民在滬尾（淡水）落地生根、抱團互助的社群歷史。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deities Section -->
+    <section id="deities" class="py-20 bg-temple-slate relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="flex justify-center items-center space-x-2 text-temple-gold">
+                    <span class="h-px w-6 bg-temple-gold"></span>
+                    <span class="text-sm font-semibold tracking-widest uppercase">主祀神祇</span>
+                    <span class="h-px w-6 bg-temple-gold"></span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold font-serif-tc text-white tracking-wider">助順將軍是誰？神祕的身世傳說</h2>
+                <p class="text-gray-400 font-light">在臺灣民間信仰中，「助順將軍」的真實身份有著不同的迷人傳說，主要有以下兩大體系：</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Theory 1 -->
+                <div class="bg-temple-charcoal border border-temple-red/20 rounded-lg p-8 hover:border-temple-gold/40 transition-all duration-300 shadow-lg relative flex flex-col justify-between">
+                    <div>
+                        <div class="text-temple-gold text-4xl mb-4"><i class="fa-solid fa-user-shield"></i></div>
+                        <h3 class="text-2xl font-bold font-serif-tc text-white mb-2">傳說一：黃府三兄弟（黃孝、黃忠、黃義）</h3>
+                        <p class="text-temple-gold/80 text-sm font-medium mb-4">民間降乩與淡水廟方最主流之說法</p>
+                        <p class="text-gray-300 leading-relaxed font-light mb-6">
+                            相傳助順將軍並非單一人，而是黃府三兄弟（名為黃孝、黃忠、黃義）。他們在世時急公好義、忠勇護國，因協助朝廷抵抗外敵或保家衛民，犧牲殉國.
+                            <br><br>
+                            死後顯靈，被玉皇大帝敕封為「助順將軍」，代表「順天助國、威震一方」。這尊神祇深得福建泉州惠安地區民眾之崇敬，並隨著惠安移民一同渡海來台，保佑開墾子民。
+                        </p>
+                    </div>
+                    <div class="border-t border-temple-red/10 pt-4 text-xs text-gray-500">
+                        * 淡水助順將軍廟神龕供奉即為黃府大將軍、二將軍與三將軍，合稱「黃府三位將軍」。
+                    </div>
+                </div>
+
+                <!-- Theory 2 -->
+                <div class="bg-temple-charcoal border border-temple-red/20 rounded-lg p-8 hover:border-temple-gold/40 transition-all duration-300 shadow-lg relative flex flex-col justify-between">
+                    <div>
+                        <div class="text-temple-gold text-4xl mb-4"><i class="fa-solid fa-pen-nib"></i></div>
+                        <h3 class="text-2xl font-bold font-serif-tc text-white mb-2">傳說二：南明抗清大儒 黃道周</h3>
+                        <p class="text-temple-gold/80 text-sm font-medium mb-4">學者考證與萬華晉德宮後期結合說</p>
+                        <p class="text-gray-300 leading-relaxed font-light mb-6">
+                            黃道周為明末著名的理學大師、書法家與愛國志士。南明隆武帝時任武英殿大學士，後因抗清兵敗，寧死不降，臨刑前咬破手指血書「綱常萬古，節義千秋」，英勇就義。
+                            <br><br>
+                            相傳閩南人民為了暗中祭祀他，避免清朝統治者的政治清算與迫害，便改以「助順將軍」這一暗號、俗稱來尊奉他，象徵「暗助大明，順天抗清」。
+                        </p>
+                    </div>
+                    <div class="border-t border-temple-red/10 pt-4 text-xs text-gray-500">
+                        * 台灣部分晉德宮（如萬華）於戰後逐步將黃道周融入信仰體系，使其同時兼具理學文人與地方守護神的色彩。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Fortune Section -->
+    <section id="interactive" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12 space-y-4">
+            <div class="flex justify-center items-center space-x-2 text-temple-gold">
+                <span class="h-px w-6 bg-temple-gold"></span>
+                <span class="text-sm font-semibold tracking-widest uppercase">誠心祈願</span>
+                <span class="h-px w-6 bg-temple-gold"></span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-bold font-serif-tc text-white">將軍爺線上靈籤</h2>
+            <p class="text-gray-400 font-light">
+                靜心閉眼，誠心默念您的姓名、出生年月日、居住地址，並在心中稟告您想請示的迷津與指引，隨後點擊「誠心求籤」按鈕。
+            </p>
+        </div>
+
+        <div class="bg-temple-slate border border-temple-red/20 rounded-xl p-6 md:p-12 shadow-2xl relative overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Left: Oracle Sticks Visual -->
+                <div class="lg:col-span-5 flex flex-col items-center justify-center space-y-6">
+                    <!-- The Stick Jar Visual using CSS/SVG -->
+                    <div id="oracle-jar-container" class="relative w-48 h-64 flex items-end justify-center">
+                        <!-- Jar Body Background -->
+                        <div id="oracle-jar" class="relative z-10 w-36 h-48 bg-gradient-to-b from-temple-darkred to-temple-red border-4 border-temple-gold rounded-b-3xl rounded-t-lg shadow-lg flex flex-col items-center justify-center">
+                            <!-- Golden Plate/Emblem -->
+                            <div class="border-2 border-temple-gold rounded-md px-3 py-1 bg-temple-charcoal text-center">
+                                <span class="text-temple-gold font-serif-tc text-sm tracking-widest font-bold">晉德宮</span>
+                            </div>
+                            <span class="text-white/60 text-xs mt-2 font-serif-tc">將軍爺靈籤</span>
+                        </div>
+                        
+                        <!-- Sticks peaking out -->
+                        <div id="oracle-sticks" class="absolute inset-x-0 bottom-16 flex justify-center space-x-0.5 z-0 transition-all duration-300">
+                            <!-- Several bamboo sticks rotated at angles -->
+                            <div class="w-2.5 h-44 bg-amber-700 border border-amber-900 rounded-t-sm transform -rotate-12 origin-bottom shadow"></div>
+                            <div class="w-2.5 h-44 bg-amber-600 border border-amber-900 rounded-t-sm transform -rotate-6 origin-bottom shadow"></div>
+                            <div class="w-2.5 h-44 bg-amber-700 border border-amber-900 rounded-t-sm transform rotate-0 origin-bottom shadow"></div>
+                            <div class="w-2.5 h-44 bg-amber-600 border border-amber-900 rounded-t-sm transform rotate-6 origin-bottom shadow"></div>
+                            <div class="w-2.5 h-44 bg-amber-700 border border-amber-900 rounded-t-sm transform rotate-12 origin-bottom shadow"></div>
+                        </div>
+                    </div>
+
+                    <!-- Button to Draw -->
+                    <button id="draw-btn" onclick="drawFortune()" class="px-8 py-3.5 bg-temple-red hover:bg-temple-darkred text-white font-semibold rounded-md border border-temple-gold/40 hover:border-temple-gold transition duration-300 w-full sm:w-64 shadow-md flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-hands-praying"></i>
+                        <span>誠心求籤 (搖動籤筒)</span>
+                    </button>
+                    <button id="reset-btn" onclick="resetFortune()" class="hidden px-6 py-2 bg-temple-charcoal hover:bg-temple-slate text-gray-400 hover:text-white text-xs rounded border border-gray-700 transition duration-300">
+                        重新求籤
+                    </button>
+                </div>
+
+                <!-- Right: Fortune Display Card -->
+                <div class="lg:col-span-7">
+                    <div id="fortune-placeholder" class="h-full min-h-[300px] border border-dashed border-gray-700 rounded-lg flex flex-col items-center justify-center text-center p-8">
+                        <div class="text-temple-gold/30 text-6xl mb-4"><i class="fa-solid fa-hourglass-start"></i></div>
+                        <p class="text-gray-400 font-light">等待有緣人叩問...</p>
+                        <p class="text-xs text-gray-500 mt-2">請於左側靜心求籤，將軍爺將給予您當下的開示與指引。</p>
+                    </div>
+
+                    <!-- Hidden Result Card -->
+                    <div id="fortune-result" class="hidden bg-temple-charcoal border-2 border-temple-gold p-6 sm:p-8 rounded-lg shadow-xl relative overflow-hidden">
+                        <!-- Traditional Decorative Header -->
+                        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-temple-gold via-temple-red to-temple-gold"></div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6 border-b border-temple-red/30 pb-4">
+                            <div>
+                                <span class="bg-temple-red text-white text-xs font-bold px-2 py-1 rounded tracking-widest uppercase" id="fortune-type">籤詩類型</span>
+                                <h3 class="text-xl sm:text-2xl font-bold font-serif-tc text-temple-gold mt-2" id="fortune-id">第 XX 籤</h3>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm text-gray-400 font-light block">將軍爺法旨</span>
+                                <span class="text-lg font-bold text-white font-serif-tc" id="fortune-luck">吉凶指數</span>
+                            </div>
+                        </div>
+
+                        <!-- Fortune Verse -->
+                        <div class="text-center bg-temple-slate/50 py-6 px-4 rounded border border-temple-red/10 my-6">
+                            <p class="text-xl sm:text-2xl font-semibold font-serif-tc tracking-widest text-white leading-relaxed mb-4" id="fortune-verse-1">籤詩第一句</p>
+                            <p class="text-xl sm:text-2xl font-semibold font-serif-tc tracking-widest text-white leading-relaxed" id="fortune-verse-2">籤詩第二句</p>
+                        </div>
+
+                        <!-- Explanations Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mt-6 pt-4 border-t border-temple-red/10">
+                            <div class="flex items-start space-x-2">
+                                <span class="text-temple-gold font-bold shrink-0">【運勢】:</span>
+                                <span class="text-gray-300 font-light" id="explanation-general">解析</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <span class="text-temple-gold font-bold shrink-0">【事業】:</span>
+                                <span class="text-gray-300 font-light" id="explanation-career">解析</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <span class="text-temple-gold font-bold shrink-0">【感情】:</span>
+                                <span class="text-gray-300 font-light" id="explanation-love">解析</span>
+                            </div>
+                            <div class="flex items-start space-x-2">
+                                <span class="text-temple-gold font-bold shrink-0">【健康】:</span>
+                                <span class="text-gray-300 font-light" id="explanation-health">解析</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz/Trivia Section -->
+    <section id="quiz" class="py-20 bg-temple-slate">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 space-y-4">
+                <div class="flex justify-center items-center space-x-2 text-temple-gold">
+                    <span class="h-px w-6 bg-temple-gold"></span>
+                    <span class="text-sm font-semibold tracking-widest uppercase">文史小挑戰</span>
+                    <span class="h-px w-6 bg-temple-gold"></span>
+                </div>
+                <h2 class="text-3xl font-bold font-serif-tc text-white">淡水將軍廟・知識趣味測試</h2>
+                <p class="text-gray-400 font-light">測試你對這座古廟文化與將軍爺信仰的了解程度！</p>
+            </div>
+
+            <!-- Quiz Card -->
+            <div class="bg-temple-charcoal border border-temple-red/30 rounded-xl p-6 sm:p-10 shadow-xl relative">
+                <!-- Question State -->
+                <div id="quiz-game">
+                    <div class="flex justify-between items-center mb-6 text-sm">
+                        <span class="text-temple-gold" id="quiz-progress">問題 1 / 3</span>
+                        <span class="text-gray-400" id="quiz-score-display">得分: 0</span>
+                    </div>
+
+                    <!-- Question text -->
+                    <h3 class="text-lg sm:text-xl font-bold text-white mb-6 font-serif-tc" id="quiz-question">讀取問題中...</h3>
+
+                    <!-- Options list -->
+                    <div class="space-y-3" id="quiz-options">
+                        <!-- Options generated by JS -->
+                    </div>
+
+                    <!-- Feedback (correct / incorrect) -->
+                    <div id="quiz-feedback" class="hidden mt-6 p-4 rounded-lg text-sm font-medium"></div>
+
+                    <!-- Next button -->
+                    <div class="mt-8 flex justify-end">
+                        <button id="quiz-next-btn" onclick="nextQuestion()" class="hidden px-6 py-2.5 bg-temple-red hover:bg-temple-darkred text-white text-sm font-semibold rounded border border-temple-gold/30 hover:border-temple-gold transition duration-300">
+                            下一題 <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Finished State (Hidden at first) -->
+                <div id="quiz-results" class="hidden text-center py-8 space-y-6">
+                    <div class="text-temple-gold text-6xl"><i class="fa-solid fa-trophy"></i></div>
+                    <h3 class="text-2xl sm:text-3xl font-bold font-serif-tc text-white">挑戰完成！</h3>
+                    <p class="text-gray-300 text-lg" id="quiz-final-score">您的得分為：0 / 100</p>
+                    <p class="text-sm text-gray-400 max-w-md mx-auto" id="quiz-evaluation">評價解析中...</p>
+                    <button onclick="restartQuiz()" class="px-8 py-3 bg-temple-red hover:bg-temple-darkred text-white font-medium rounded-md border border-temple-gold/30 hover:border-temple-gold transition duration-300">
+                        重新挑戰
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Info & Map Section -->
+    <section id="visit" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+            <!-- Left Panel: Visitor Info -->
+            <div class="lg:col-span-5 bg-temple-slate border border-temple-red/30 rounded-xl p-8 flex flex-col justify-between">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-2 text-temple-gold">
+                        <span class="h-px w-8 bg-temple-gold"></span>
+                        <span class="text-sm font-semibold tracking-widest uppercase">參拜指引</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-serif-tc text-white">蒞臨參禮</h2>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">
+                        來到淡水老街漫遊時，不妨轉進位於中正路上的將軍廟。點一炷清香，洗滌心靈的喧囂，體會大隱於市的百年寧靜。
+                    </p>
+                    
+                    <div class="space-y-4 pt-4 border-t border-temple-red/20">
+                        <div class="flex items-start space-x-3">
+                            <div class="text-temple-gold mt-1"><i class="fa-solid fa-map-location-dot"></i></div>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">廟宇地址</h4>
+                                <p class="text-gray-300 text-sm font-light mt-0.5">新北市淡水區長庚里中正路64號 (淡水老街與菜市場旁)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-temple-gold mt-1"><i class="fa-solid fa-clock"></i></div>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">開放參拜時間</h4>
+                                <p class="text-gray-300 text-sm font-light mt-0.5">每日上午 07:00 - 晚上 20:00 (請以現場公告為準)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-temple-gold mt-1"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">聯繫電話</h4>
+                                <p class="text-gray-300 text-sm font-light mt-0.5">(02) 2623-3797</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="text-temple-gold mt-1"><i class="fa-solid fa-hands"></i></div>
+                            <div>
+                                <h4 class="font-semibold text-white text-sm">參拜禮儀</h4>
+                                <p class="text-gray-300 text-sm font-light mt-0.5">主祀黃府大、二、三將軍，可準備鮮花、素果、素餅誠心敬奉。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 pt-4 border-t border-temple-red/20 text-xs text-gray-500">
+                    * 交通建議：自捷運淡水站出口，沿中正路（淡水老街）步行約10-15分鐘即可抵達。
+                </div>
+            </div>
+
+            <!-- Right Panel: Interactive Street Guide / Map Placeholder with details -->
+            <div class="lg:col-span-7 bg-temple-charcoal border border-temple-red/20 rounded-xl p-8 flex flex-col justify-between relative overflow-hidden">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold font-serif-tc text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-compass text-temple-gold"></i>
+                        <span>滬尾後街仔地理人文特寫</span>
+                    </h3>
+                    <p class="text-gray-300 text-sm leading-relaxed font-light">
+                        在清代，淡水「晉德宮」（將軍廟）位於滬尾後街，與當時船頭行（河運貿易商）和勞工社群有深厚淵源。
+                        本廟與一般矗立於廣大廣場的廟宇不同，由於歷經市街重劃，它與現代公寓、老舊民宅融為一體，形成了「街屋式廟宇」的特殊地景，是北台灣少數保存清朝與早期移民聚落紋理的空間特寫。
+                    </p>
+
+                    <!-- Mock Map Visual Container -->
+                    <div class="bg-temple-slate/50 border border-temple-red/30 rounded-lg p-4 relative min-h-[220px] flex flex-col justify-between">
+                        <!-- Abstract Grid for visual flare -->
+                        <div class="absolute inset-0 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+                        
+                        <div class="relative z-10 flex flex-col md:flex-row justify-between gap-4">
+                            <div class="space-y-2">
+                                <span class="inline-block bg-temple-gold/10 text-temple-gold text-xs font-semibold px-2 py-0.5 rounded border border-temple-gold/20">周邊推薦景點</span>
+                                <ul class="text-xs text-gray-400 space-y-1 font-light">
+                                    <li><i class="fa-solid fa-location-dot text-temple-gold mr-1"></i> <strong>淡水福佑宮</strong> (步行約5分鐘)</li>
+                                    <li><i class="fa-solid fa-location-dot text-temple-gold mr-1"></i> <strong>淡水清水巖祖師廟</strong> (步行約8分鐘)</li>
+                                    <li><i class="fa-solid fa-location-dot text-temple-gold mr-1"></i> <strong>金色水岸自行車道</strong> (就在後方河畔)</li>
+                                </ul>
+                            </div>
+                            <div class="text-right text-xs text-gray-500 self-end md:self-auto">
+                                座標：25.170281, 121.440268
+                            </div>
+                        </div>
+
+                        <!-- Illustrated Map Legend -->
+                        <div class="relative z-10 grid grid-cols-3 gap-2 text-center text-xs mt-6">
+                            <div class="bg-temple-charcoal/80 border border-temple-red/20 py-2.5 rounded">
+                                <i class="fa-solid fa-train-subway text-temple-gold mb-1 block text-sm"></i>
+                                <span class="text-gray-400 font-light text-[10px]">淡水捷運站</span>
+                            </div>
+                            <div class="bg-temple-charcoal/80 border border-temple-gold/40 py-2.5 rounded ring-1 ring-temple-gold/30">
+                                <i class="fa-solid fa-synagogue text-temple-gold mb-1 block text-sm"></i>
+                                <span class="text-white font-medium text-[10px]">助順將軍廟</span>
+                            </div>
+                            <div class="bg-temple-charcoal/80 border border-temple-red/20 py-2.5 rounded">
+                                <i class="fa-solid fa-anchor text-temple-gold mb-1 block text-sm"></i>
+                                <span class="text-gray-400 font-light text-[10px]">淡水老街碼頭</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <a href="https://www.google.com/maps/search/?api=1&query=%E6%B7%A1%E6%B0%B4%E5%8A%A9%E9%A0%86%E5%B0%87%E8%BB%8D%E5%BB%9F%E6%99%8B%E5%BE%B7%E5%AE%AE" target="_blank" class="px-6 py-2 bg-transparent hover:bg-temple-red/20 text-temple-gold text-xs font-semibold rounded border border-temple-gold/40 hover:border-temple-gold transition duration-300 flex items-center space-x-1 shadow-md">
+                        <span>在 Google Maps 中開啟</span>
+                        <i class="fa-solid fa-external-link text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-temple-charcoal border-t border-temple-red/20 py-12 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="inline-flex items-center space-x-2 text-temple-gold border-y border-temple-gold/20 py-1.5 px-4">
+                <span class="w-1 h-1 bg-temple-gold rotate-45"></span>
+                <span class="font-serif-tc text-xs tracking-widest font-bold">香火綿延・德被四海</span>
+                <span class="w-1 h-1 bg-temple-gold rotate-45"></span>
+            </div>
+            
+            <p class="text-xs text-gray-500 font-light max-w-md mx-auto">
+                本數位導覽網頁旨在宣揚新北市淡水地方信仰與文史之美。網頁內文史資料彙整自地方誌與文史調研。
+            </p>
+            
+            <p class="text-[11px] text-gray-600">
+                &copy; 2026 淡水助順將軍廟 (晉德宮) 數位導覽版權所有。
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript For Interactivity -->
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Hide mobile menu when links are clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // -------------------------
+        // Virtual Fortune Drawing System
+        // -------------------------
+        const fortunes = [
+            {
+                id: "第一籤",
+                type: "【上上大吉】",
+                luck: "五福臨門・事事如意",
+                verse1: "雲開霧散見青天，萬里光輝照大千。",
+                verse2: "所求之事皆成就，百般順遂福綿綿。",
+                general: "目前正值運勢亨通之時，陰霾已盡數散去，光明就在眼前。",
+                career: "事業大有可為，若有新計劃或創業想法，此時是全力付諸實行的黃金時期。",
+                love: "感情圓滿，單身者容易遇到心心相印的伴侶，已有伴侶者感情更加穩固甜蜜。",
+                health: "身體狀況極佳，舊疾有康復之象，保持規律作息與開朗心情即可。"
+            },
+            {
+                id: "第十二籤",
+                type: "【中吉】",
+                luck: "漸入佳境・順水行舟",
+                verse1: "風平浪靜好行舟，謀望求財漸出頭。",
+                verse2: "凡事不須心太急，安心守分自然優。",
+                general: "運勢平穩且有漸入佳境之勢，不宜急躁，順應自然發展最為有利。",
+                career: "工作進度順暢，此時適合深耕守成。雖然沒有爆發性成長，但一步一腳印能換來豐厚果實。",
+                love: "感情穩定和諧，多一點互相傾聽，不需要追求虛華的浪漫，平淡即是福氣。",
+                health: "健康良好，平日多注意關節保養與多喝水，適當拉筋有助於減輕疲勞。"
+            },
+            {
+                id: "第二十五籤",
+                type: "【中平】",
+                luck: "靜待時機・以守為攻",
+                verse1: "木落花殘秋風寒，耐得寂寞莫心寬。",
+                verse2: "待得春雷一聲響，枯木逢春滿庭香。",
+                general: "當前運勢處於蓄勢期，如同寒冬臘月。此時不宜盲目擴張或做重大變更，靜心沉澱是最佳選擇。",
+                career: "職場上面對挑戰應保持耐心，切忌與他人發生無謂爭執，默默積累實力，好時機很快會來。",
+                love: "桃花緣分尚未完全成熟，急於求成恐遭波折，建議先從朋友做起，增進彼此了解。",
+                health: "需多注意呼吸系統、氣管、或流感等小感冒，注意增減衣物與空氣流通。"
+            },
+            {
+                id: "第三十六籤",
+                type: "【上吉】",
+                luck: "貴人相助・廣結善緣",
+                verse1: "貴人指引路康莊，謀望求財事事昌。",
+                verse2: "多行好事存誠意，福祿雙全喜洋洋。",
+                general: "身邊貴人環繞，若遇到疑難雜症，不妨虛心向長輩或前輩求助，常能迎刃而解。",
+                career: "職場有升遷、調動好機會，且能得到上司的賞識與提攜，團隊合作能發揮極大效益。",
+                love: "人緣絕佳，可能會由長輩或朋友牽線認識優秀的對象，真誠相待將有美好進展。",
+                health: "精神飽滿，但切忌熬夜，多從事戶外休閒運動能進一步提升正能量。"
+            },
+            {
+                id: "第四十籤",
+                type: "【中下籤】",
+                luck: "居安思危・謹慎行事",
+                verse1: "波濤洶湧莫輕狂，行船遇阻且退防。",
+                verse2: "閉門修省無差錯，避過風波福自長。",
+                general: "目前容易遇到意外的小阻礙，不宜意氣用事或意圖強行突破，採取低調、退守的姿態最安全。",
+                career: "工作上要加倍細心，簽署合約或處理財務時務必反覆檢查，防範文書漏洞與小人口舌。",
+                love: "雙方容易因為觀念落差發生口角，各退一步海闊天空，冷靜思考才能維持長久關係。",
+                health: "體力消耗較大，容易有失眠或精神衰弱現象，晚上宜放鬆身心，適度排解工作壓力。"
+            }
+        ];
+
+        let isDrawing = false;
+
+        function drawFortune() {
+            if (isDrawing) return;
+            isDrawing = true;
+            
+            // UI elements
+            const jar = document.getElementById('oracle-jar');
+            const sticks = document.getElementById('oracle-sticks');
+            const drawBtn = document.getElementById('draw-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const placeholder = document.getElementById('fortune-placeholder');
+            const resultCard = document.getElementById('fortune-result');
+            
+            // Reset states
+            placeholder.classList.remove('hidden');
+            resultCard.classList.add('hidden');
+            resetBtn.classList.add('hidden');
+            
+            // Animate Jar (Shake)
+            jar.classList.add('shake-active');
+            sticks.style.transform = "translateY(-15px)";
+            drawBtn.disabled = true;
+            drawBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>將軍爺顯靈指引中...</span>`;
+            
+            // Randomly select fortune
+            const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+            
+            // Populate results
+            document.getElementById('fortune-type').innerText = randomFortune.type;
+            document.getElementById('fortune-id').innerText = randomFortune.id;
+            document.getElementById('fortune-luck').innerText = randomFortune.luck;
+            document.getElementById('fortune-verse-1').innerText = randomFortune.verse1;
+            document.getElementById('fortune-verse-2').innerText = randomFortune.verse2;
+            document.getElementById('explanation-general').innerText = randomFortune.general;
+            document.getElementById('explanation-career').innerText = randomFortune.career;
+            document.getElementById('explanation-love').innerText = randomFortune.love;
+            document.getElementById('explanation-health').innerText = randomFortune.health;
+            
+            // Color-code the badge based on fortune type
+            const typeBadge = document.getElementById('fortune-type');
+            if (randomFortune.type.includes('上上') || randomFortune.type.includes('上吉')) {
+                typeBadge.className = "bg-emerald-700 text-white text-xs font-bold px-2 py-1 rounded tracking-widest uppercase";
+            } else if (randomFortune.type.includes('中吉') || randomFortune.type.includes('吉')) {
+                typeBadge.className = "bg-sky-700 text-white text-xs font-bold px-2 py-1 rounded tracking-widest uppercase";
+            } else if (randomFortune.type.includes('中平')) {
+                typeBadge.className = "bg-amber-600 text-white text-xs font-bold px-2 py-1 rounded tracking-widest uppercase";
+            } else {
+                typeBadge.className = "bg-red-800 text-white text-xs font-bold px-2 py-1 rounded tracking-widest uppercase";
+            }
+
+            // End shaking after 2.5s and display result
+            setTimeout(() => {
+                jar.classList.remove('shake-active');
+                sticks.style.transform = "translateY(0px)";
+                
+                placeholder.classList.add('hidden');
+                resultCard.classList.remove('hidden');
+                
+                drawBtn.disabled = false;
+                drawBtn.innerHTML = `<i class="fa-solid fa-hands-praying"></i> <span>重新向將軍爺求籤</span>`;
+                resetBtn.classList.remove('hidden');
+                isDrawing = false;
+            }, 2200);
+        }
+
+        function resetFortune() {
+            document.getElementById('fortune-placeholder').classList.remove('hidden');
+            document.getElementById('fortune-result').classList.add('hidden');
+            document.getElementById('reset-btn').classList.add('hidden');
+        }
+
+        // -------------------------
+        // Quiz System Data & Logic
+        // -------------------------
+        const quizData = [
+            {
+                question: "淡水助順將軍廟（晉德宮）的歷史可追溯至清代哪個皇帝在位期間？",
+                options: [
+                    "清乾隆年間",
+                    "清道光年間 (約1841年)",
+                    "清同治年間",
+                    "清光緒年間"
+                ],
+                correct: 1,
+                explanation: "根據地方誌與歷史考察，淡水助順將軍廟的香火歷史至少可以追溯至清道光21年（1841年），由早期移民供奉至今。"
+            },
+            {
+                question: "淡水助順將軍廟每年舉辦「聖誕千秋」慶典的日期，傳統上為農曆的何時？",
+                options: [
+                    "農曆五月初五",
+                    "農曆十月初三",
+                    "農曆十月初六",
+                    "農曆十二月十六"
+                ],
+                correct: 2,
+                explanation: "雖然萬華晉德宮於十月初三慶祝聖誕，但淡水助順將軍廟傳統上以「農曆十月初六」作為將軍爺的誕辰日並舉辦盛大的慶典科儀。"
+            },
+            {
+                question: "關於「助順將軍」的真實身世，在台灣文史考究與民間傳說中有哪些說法？",
+                options: [
+                    "明末抗清、守節英勇殉國的理學家「黃道周」",
+                    "義勇愛國的黃府三兄弟（黃孝、黃忠、黃義）",
+                    "以上皆是，兩者在不同廟宇系統與信仰中有關聯",
+                    "唐代名將黃忠"
+                ],
+                correct: 2,
+                explanation: "助順將軍的身世有兩種主要說法：一是廟方與乩身所言的「黃府三位將軍」（黃孝、黃忠、黃義三兄弟）；二是戰後部分地方將其與明末大儒「黃道周」信仰相融合，因此以上兩者皆是此信仰的一部分。"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let hasAnswered = false;
+
+        function loadQuestion() {
+            hasAnswered = false;
+            const currentQuestion = quizData[currentQuestionIndex];
+            
+            // Progress
+            document.getElementById('quiz-progress').innerText = `問題 ${currentQuestionIndex + 1} / ${quizData.length}`;
+            document.getElementById('quiz-score-display').innerText = `目前得分: ${score}`;
+            
+            // Question Text
+            document.getElementById('quiz-question').innerText = currentQuestion.question;
+            
+            // Clear options and feed-back
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.add('hidden');
+            
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+
+            // Generate option buttons
+            currentQuestion.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-lg bg-temple-slate hover:bg-temple-red/20 border border-gray-700 hover:border-temple-gold/40 transition duration-200 text-sm font-light text-gray-300 flex items-center justify-between";
+                btn.innerHTML = `<span>${option}</span> <i class="fa-regular fa-circle text-gray-600"></i>`;
+                btn.onclick = () => selectOption(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedIndex, clickedBtn) {
+            if (hasAnswered) return;
+            hasAnswered = true;
+            
+            const currentQuestion = quizData[currentQuestionIndex];
+            const feedback = document.getElementById('quiz-feedback');
+            const optionsContainer = document.getElementById('quiz-options');
+            const buttons = optionsContainer.getElementsByTagName('button');
+
+            // Disable all buttons and show colors
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].disabled = true;
+                if (i === currentQuestion.correct) {
+                    buttons[i].className = "w-full text-left p-4 rounded-lg bg-emerald-950/50 border-2 border-emerald-500 text-white text-sm font-medium flex items-center justify-between";
+                    buttons[i].innerHTML = `<span>${currentQuestion.options[i]}</span> <i class="fa-solid fa-circle-check text-emerald-500"></i>`;
+                } else if (i === selectedIndex) {
+                    buttons[i].className = "w-full text-left p-4 rounded-lg bg-red-950/50 border-2 border-red-500 text-white text-sm font-medium flex items-center justify-between";
+                    buttons[i].innerHTML = `<span>${currentQuestion.options[i]}</span> <i class="fa-solid fa-circle-xmark text-red-500"></i>`;
+                } else {
+                    buttons[i].className = "w-full text-left p-4 rounded-lg bg-temple-slate opacity-40 border border-gray-800 text-sm font-light text-gray-500 flex items-center justify-between";
+                }
+            }
+
+            // Scoring
+            if (selectedIndex === currentQuestion.correct) {
+                score += 33.3; // Approx to sum 100 for 3 questions
+                feedback.className = "mt-6 p-4 rounded-lg text-sm font-medium bg-emerald-950/30 border border-emerald-500/30 text-emerald-300";
+                feedback.innerHTML = `<strong>答對了！</strong> ${currentQuestion.explanation}`;
+            } else {
+                feedback.className = "mt-6 p-4 rounded-lg text-sm font-medium bg-red-950/30 border border-red-500/30 text-red-300";
+                feedback.innerHTML = `<strong>答錯囉！</strong> 正確答案為第二選項。${currentQuestion.explanation}`;
+            }
+            feedback.classList.remove('hidden');
+            
+            // Show next button
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+            if (currentQuestionIndex === quizData.length - 1) {
+                document.getElementById('quiz-next-btn').innerHTML = `查看結果 <i class="fa-solid fa-square-poll-vertical ml-1"></i>`;
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                // Show Quiz Results
+                document.getElementById('quiz-game').classList.add('hidden');
+                const resultsContainer = document.getElementById('quiz-results');
+                resultsContainer.classList.remove('hidden');
+                
+                // Final calculation
+                const finalScore = Math.round(score === 99.9 ? 100 : score);
+                document.getElementById('quiz-final-score').innerText = `您的得分為：${finalScore} / 100`;
+                
+                let evaluation = "";
+                if (finalScore >= 90) {
+                    evaluation = "太厲害了！你對淡水助順將軍廟的歷史與民間信仰有著深厚且專業的認識，簡直是淡水文史通！";
+                } else if (finalScore >= 60) {
+                    evaluation = "很棒！你已經初步了解將軍廟的起源以及主祀神明，下次探訪淡水老街時可以實地去看看喔！";
+                } else {
+                    evaluation = "沒關係，將軍廟是一座大隱於市、非常有深度與故事的百年古廟，網頁多讀幾遍，你也能成為文史通！";
+                }
+                document.getElementById('quiz-evaluation').innerText = evaluation;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-game').classList.remove('hidden');
+            document.getElementById('quiz-next-btn').innerHTML = `下一題 <i class="fa-solid fa-arrow-right ml-1"></i>`;
+            loadQuestion();
+        }
+
+        // Initialize quiz on window load
+        window.onload = function() {
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>
